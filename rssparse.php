@@ -1,8 +1,7 @@
 <?php
-	
+echo '<?xml version="1.0" encoding="UTF-8"?>';
 require_once(dirname(__FILE__) . '/../../../wp-config.php');
 nocache_headers();
-
 
 if (class_exists('SimplePie'))
 {
@@ -32,7 +31,7 @@ $feed->init();
 $feed->handle_content_type();
  
 // Let's begin our XHTML webpage code.  The DOCTYPE is supposed to be the very first thing, so we'll keep it on the same line as the closing-PHP tag.
-?>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+?>
 <feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom" xmlns:btwb="http://beyondthewhiteboard.com/">
     <title><?php echo $feed->get_title(); ?></title>
     <?php 
@@ -43,7 +42,7 @@ $feed->handle_content_type();
         if ($lastDate == $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"]) {
             //$feed->get_items()[$lastIndex]->set_content($feed->get_items()[$lastIndex] . "\n" . $item->get_content());
             $content[$lastIndex]=$content[$lastIndex] . "\n\n" . $item->get_title() . "\n" . $item->get_content();
-            $title[$lastIndex]=$title[$lastIndex] . " & " . $item->get_title();
+            $title[$lastIndex]=$title[$lastIndex] . " &amp; " . $item->get_title();
         } else {
             $lastDate = $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"];
             $lastIndex = $i;
