@@ -32,7 +32,7 @@ $feed->init();
 $feed->handle_content_type();
  
 // Let's begin our XHTML webpage code.  The DOCTYPE is supposed to be the very first thing, so we'll keep it on the same line as the closing-PHP tag.
-?><?xml version="1.0" encoding="UTF-8"?>
+?>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom" xmlns:btwb="http://beyondthewhiteboard.com/">
     <title><?php echo $feed->get_title(); ?></title>
     <?php 
