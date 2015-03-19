@@ -66,7 +66,7 @@ $actual_link = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERV
         <id><?php echo $item->get_item_tags("http://www.w3.org/2005/Atom","id")[0]["data"];?></id>
         <published><?php echo $item->get_item_tags("http://www.w3.org/2005/Atom","published")[0]["data"];?></published>
         <updated><?php echo $item->get_item_tags("http://www.w3.org/2005/Atom","updated")[0]["data"];?></updated>
-        <link rel="alternate" type="text/html" href="<?php echo $item->get_item_tags("link")[0]["href"] ?>"/>
+        <link rel="alternate" type="text/html" href="<?php echo $item->get_item_tags("http://www.w3.org/2005/Atom","link")[0]["attribs"][""]["href"]; ?>"/>
         <title><?php echo $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"]." - ".$title[$i]; ?></title>
         <btwb:assigned><?php echo $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"]; ?></btwb:assigned>
         <summary>
