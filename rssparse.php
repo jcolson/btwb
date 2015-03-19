@@ -20,6 +20,7 @@ $feed = new SimplePie();
  
 // Set which feed to process.
 $rssurl = $_GET['url'];
+$feed->enable_order_by_date(false);
 //somthing like this
 //http://beyondthewhiteboard.com/gyms/4860-threefold-crossfit/wods.atom
 $feed->set_feed_url($rssurl);
@@ -29,11 +30,16 @@ $feed->init();
  
 // This makes sure that the content is sent to the browser as text/html and the UTF-8 character set (since we didn't change it).
 $feed->handle_content_type();
- 
+
+$actual_link = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 // Let's begin our XHTML webpage code.  The DOCTYPE is supposed to be the very first thing, so we'll keep it on the same line as the closing-PHP tag.
 ?>
+
 <feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom" xmlns:btwb="http://beyondthewhiteboard.com/">
+    <id>tag:btwb-plugin,2015-01-01:<?php echo $_SERVER['REQUEST_URI'] ?></id>
+    <link rel="self" type="application/atom+xml" href="<?php echo $actual_link ?>"/>
     <title><?php echo $feed->get_title(); ?></title>
+    <updated><?php echo $feed->get_feed_tags("http://www.w3.org/2005/Atom","updated")[0]["data"]; ?></updated>
     <?php 
     $lastDate = "test";
     $lastIndes = "-1";
@@ -57,11 +63,16 @@ $feed->handle_content_type();
             $lastDate = $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"];
     ?>
     <entry>
+        <id><?php echo $item->get_item_tags("http://www.w3.org/2005/Atom","id")[0]["data"];?></id>
+        <published><?php echo $item->get_item_tags("http://www.w3.org/2005/Atom","published")[0]["data"];?></published>
+        <updated><?php echo $item->get_item_tags("http://www.w3.org/2005/Atom","updated")[0]["data"];?></updated>
+        <link rel="alternate" type="text/html" href="<?php echo $item->get_item_tags("link")[0]["href"] ?>"/>
         <title><?php echo $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"]." - ".$title[$i]; ?></title>
         <btwb:assigned><?php echo $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"]; ?></btwb:assigned>
         <summary>
             <?php echo $content[$i] ?>
         </summary>
+        <author><name><?php echo $item->get_author(); ?></name></author>
     </entry>
     <?php } } ?>
 </feed>
