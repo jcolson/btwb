@@ -47,12 +47,12 @@ $actual_link = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERV
         $item = $feed->get_items()[$i];
         if ($lastDate == $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"]) {
             //$feed->get_items()[$lastIndex]->set_content($feed->get_items()[$lastIndex] . "\n" . $item->get_content());
-            $content[$lastIndex]=$content[$lastIndex] . "\n\n" . "<b>".$item->get_title()."</b>" . "\n" . $item->get_content();
+            $content[$lastIndex]=$content[$lastIndex] . "\n\n" . $item->get_title() . "\n" . $item->get_content();
             $title[$lastIndex]=$title[$lastIndex] . " &amp; " . $item->get_title();
         } else {
             $lastDate = $item->get_item_tags("http://beyondthewhiteboard.com/","assigned")[0]["data"];
             $lastIndex = $i;
-            $content[$i]="<b>".$item->get_title()."</b>"."\n".$item->get_content();
+            $content[$i]=$item->get_title()."\n".$item->get_content();
             $title[$i]=$item->get_title();
         }
     }
