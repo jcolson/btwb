@@ -35,7 +35,7 @@ function btwb_core_options_page()
 <div style="margin:50px auto; text-align:center;">
 	<h3>Beyond The Whiteboard RSS Fixer</h3>
 	<p>Plugin is loaded - use cron to activate the
-	http://yourwebsite.com/wp-content/plugins/btwb/reparse.php?url=http://beyondthewhiteboard.com/gyms/4860-threefold-crossfit/wods.atom
+	http://yourwebsite.com/wp-content/plugins/btwb/rssparse.php?url=http://beyondthewhiteboard.com/gyms/4860-threefold-crossfit/wods.atom
 	(or something similar) script.  This plugin requires simplepie-core plugin as well.</p>
 </div>
 
